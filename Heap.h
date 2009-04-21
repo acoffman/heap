@@ -2,6 +2,8 @@
 #define HEAP_H
 
 #include <vector>
+#include <fstream>
+#include <string>
 
 using namespace std;
 
