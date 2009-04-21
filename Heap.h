@@ -11,6 +11,7 @@ template <typename T>
 class Heap{
 	
 	public: 
+		Heap();
 		void insertValue(T value);
 		T removeMin();
 		void empty();
@@ -18,7 +19,7 @@ class Heap{
 
 	private:
 		vector<T> heap;
-		void percolateUp(T val);
+		int size;
 		void percolateDown(T val);
 };
 
