@@ -20,7 +20,7 @@ int Heap<T>::loadFromFile(string fileName){
 	}else{
 		while(!fin.eof()){
 			T entry;
-			fin >> enter;
+			fin >> entry;
 			insertValue(entry);
 			++count;
 		}
@@ -37,21 +37,21 @@ void Heap<T>::insertValue(T val){
 
 	//this is where the percolate up happens
 	for(;hole > 1 && val < heap[hole/2]; hole /=2)
-		array[hole] = array[hole/2];
+		heap[hole] = heap[hole/2];
 
-	array[hole] = x;
+	heap[hole] = val;
 }
 
 template <class T>
 T Heap<T>::removeMin(){
-	if(heap.empty()){
-		cerr << "HEAP IS EMPTY!";
+	if(size == 0){
+		cerr << "HEAP IS EMPTY!" << endl;
 		exit(1);
 	}
 		
 
-	T removed = array[1];
-	array[1] = array[size--];
+	T removed = heap[1];
+	heap[1] = heap[size--];
 	percolateDown(1);
 
 	return removed;
@@ -60,17 +60,17 @@ T Heap<T>::removeMin(){
 template <class T>
 void Heap<T>::percolateDown(int hole){
 	
-	int childNode;
+	int child;
 	T tmp = heap[hole];
 
 	for(;hole*2 <= size; hole = child){
 		child = hole*2;
-		if(child != size && array[child +1] < array[child])
+		if(child != size && heap[child +1] < heap[child])
 			child++;
-		if(array[child] < tmp)
-			array[hole] = array[child];
+		if(heap[child] < tmp)
+			heap[hole] = heap[child];
 		else
 			break;
 	}
-	array[hole] = tmp;
+	heap[hole] = tmp;
 }

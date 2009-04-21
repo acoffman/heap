@@ -20,7 +20,7 @@ class Heap{
 	private:
 		vector<T> heap;
 		int size;
-		void percolateDown(T val);
+		void percolateDown(int hole);
 };
 
 #include "Heap.cpp"
