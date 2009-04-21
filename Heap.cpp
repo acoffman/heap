@@ -18,13 +18,13 @@ int Heap<T>::loadFromFile(string fileName){
 	if(fin.fail()){
 		return -1;
 	}else{
-		while(!fin.eof()){
-			T entry;
-			fin >> entry;
+		T entry;
+		while(fin >> entry){
 			insertValue(entry);
 			++count;
 		}
 	}
+	fin.close();
 	return count;
 }
 
