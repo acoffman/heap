@@ -1,14 +1,31 @@
+/******************************
+ * Author: Adam Coffman
+ *
+ * Filename: Heap.c
+ *
+ * Description: This is the implementation file for
+ * 	the Heap class. 
+ *
+ * ******************************/
+
+//Initialize the heap size to 1 and the number
+//of elements to 0
 template <class T>
 Heap<T>::Heap(){
 	size = 0;
 	heap.resize(1);
 }
 
+//Empty the heap and set the number of elements to zero
 template <class T>
 void Heap<T>::empty(){
 	heap.clear();
+	size = 0;
 }
 
+//Load in values from a whitespace delimited file
+//the int variable count keeps track of how many values
+//have been loaded.
 template <class T>
 int Heap<T>::loadFromFile(string fileName){
 	ifstream fin;
@@ -28,8 +45,13 @@ int Heap<T>::loadFromFile(string fileName){
 	return count;
 }
 
+//Insert a value at the bottom-most 
+//available spot, and then 
+//percolate it up the tree until it reaches
+//the correct spot.
 template <class T>
 void Heap<T>::insertValue(T val){
+	//resize the heap array if we need to
 	if(size == heap.size()-1)
 		heap.resize(heap.size() * 2);
 
@@ -42,6 +64,10 @@ void Heap<T>::insertValue(T val){
 	heap[hole] = val;
 }
 
+//Removes the minimum value in the heap, and then performs the percolate
+//down operation to maintain heap order.
+//Prints a message to cerr and exits if the heap is empty.
+//Returns the value that was removed.
 template <class T>
 T Heap<T>::removeMin(){
 	if(size == 0){
@@ -57,6 +83,16 @@ T Heap<T>::removeMin(){
 	return removed;
 }
 
+//If there are no elements in the heap,
+//return true
+template <class T>
+bool Heap<T>::isEmpty(){
+	return size == 0;
+}
+
+//This function percolates a value from the top
+//of the "tree" down to its proper location, after the
+//minimum value has been removed. 
 template <class T>
 void Heap<T>::percolateDown(int hole){
 	

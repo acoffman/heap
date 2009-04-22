@@ -7,13 +7,13 @@ using namespace std;
 int main(){
 	Heap<int> testHeap;
 
-	testHeap.loadFromFile("entry");
+	int num = testHeap.loadFromFile("entry");
 
-	int x = 0;
-	while (x < 100){
+	while (!testHeap.isEmpty()){
 		cout << testHeap.removeMin() << endl;
-		++x;
 	}
+
+	cout << endl << num;
 
 	return 0;
 }
